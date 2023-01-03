@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { parseCookies } from "nookies";
+
 import { AuthTokenError } from "./errors/AuthTokenError";
+
 import { signOut } from "../context/AuthContext";
 
 export function setupAPIClient(ctx = undefined) {
@@ -29,5 +31,6 @@ export function setupAPIClient(ctx = undefined) {
       return Promise.reject(error);
     }
   );
+
   return api;
 }

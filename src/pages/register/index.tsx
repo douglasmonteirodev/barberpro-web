@@ -1,18 +1,31 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Head from "next/head";
 import { Button, Center, Flex, Input, Text } from "@chakra-ui/react";
 import logoImg from "../../../public/images/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Register() {
+  const { signUp } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  function handleRegister() {
-    alert("cliucou");
+  async function handleRegister() {
+    if (name === "" && email === "" && password === "") {
+      alert("Complete todos os dados");
+      return;
+    }
+
+    await signUp({
+      name,
+      email,
+      password,
+    });
   }
+
   return (
     <>
       <Head>
@@ -69,7 +82,7 @@ export default function Register() {
             _hover={{ bg: "#fcb449" }}
             onClick={handleRegister}
           >
-            Acessar
+            Cadastrar
           </Button>
 
           <Center mt={2}>
