@@ -23,7 +23,7 @@ export default function Profile({ user, premium }: ProfileProps) {
   const { logoutUser } = useContext(AuthContext);
 
   const [name, setName] = useState(user && user?.name);
-  const [endereco, setEndereco] = useState(user && user?.endereco);
+  const [endereco, setEndereco] = useState((user && user?.endereco) || "");
 
   async function handleLogout() {
     await logoutUser();

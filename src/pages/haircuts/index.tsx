@@ -7,7 +7,7 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { Sidebar } from "../../components/sidebar";
@@ -31,7 +31,35 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
     haircuts || []
   );
 
+  const [disableHaircut, setDisableHaircut] = useState("enabled");
+
   const [isMobile] = useMediaQuery("(max-width: 500px)");
+
+  async function handleDisable(e: ChangeEvent<HTMLInputElement>) {
+    const apiClient = setupAPIClient();
+
+    if (e.target.value === "disabled") {
+      setDisableHaircut("enabled");
+
+      const response = await apiClient.get("/haircuts", {
+        params: {
+          status: true,
+        },
+      });
+
+      setHaircutList(response.data);
+    } else {
+      setDisableHaircut("disabled");
+
+      const response = await apiClient.get("/haircuts", {
+        params: {
+          status: false,
+        },
+      });
+
+      setHaircutList(response.data);
+    }
+  }
   return (
     <>
       <Head>
@@ -66,7 +94,15 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
 
             <Stack ml="auto" alignItems="center" direction="row">
               <Text fontWeight="bold">ATIVOS</Text>
-              <Switch colorScheme="green" size="lg" />
+              <Switch
+                colorScheme="green"
+                size="lg"
+                value={disableHaircut}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  handleDisable(e)
+                }
+                isChecked={disableHaircut === "disabled" ? false : true}
+              />
             </Stack>
           </Flex>
 
