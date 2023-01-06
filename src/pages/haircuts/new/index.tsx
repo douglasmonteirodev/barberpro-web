@@ -12,6 +12,8 @@ import { Sidebar } from "../../../components/sidebar";
 import { FiChevronLeft } from "react-icons/fi";
 import { canSSRAuth } from "../../../utils/canSSRAuth";
 import { setupAPIClient } from "../../../services/api";
+import { useState } from "react";
+import Router from "next/router";
 
 interface NewHaircutProps {
   subscription: boolean;
@@ -20,6 +22,26 @@ interface NewHaircutProps {
 
 export default function NewHaircut({ subscription, count }: NewHaircutProps) {
   const [isMobile] = useMediaQuery("(max-width: 500px)");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+
+  async function handleRegister() {
+    if (name === "" || price === "") {
+      return;
+    }
+    try {
+      const apiClient = setupAPIClient();
+
+      await apiClient.post("/haircut", {
+        name: name,
+        price: Number(price),
+      });
+
+      Router.push("/haircuts");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <Head>
@@ -84,6 +106,8 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
               bg="gray.900"
               mb={3}
               disabled={!subscription && count >= 3}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <Input
               placeholder="Valor do corte ex: R$49.99"
@@ -93,6 +117,8 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
               bg="gray.900"
               mb={4}
               disabled={!subscription && count >= 3}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
             />
 
             <Button
@@ -102,6 +128,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
               bg="button.cta"
               _hover={{ bg: "#ffb13e" }}
               disabled={!subscription && count >= 3}
+              onClick={handleRegister}
             >
               Cadastrar
             </Button>
