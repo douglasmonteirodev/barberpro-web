@@ -93,7 +93,9 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
             </Link>
 
             <Stack ml="auto" alignItems="center" direction="row">
-              <Text fontWeight="bold">ATIVOS</Text>
+              <Text fontWeight="bold">
+                {disableHaircut === "enabled" ? "ATIVOS" : "DESATIVOS"}
+              </Text>
               <Switch
                 colorScheme="green"
                 size="lg"
@@ -107,7 +109,11 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
           </Flex>
 
           {haircutList.map((haircut) => (
-            <Link href="/haircuts/123" legacyBehavior key={haircut.id}>
+            <Link
+              href={`/haircuts/${haircut.id}`}
+              legacyBehavior
+              key={haircut.id}
+            >
               <Flex
                 cursor="pointer"
                 width="100%"

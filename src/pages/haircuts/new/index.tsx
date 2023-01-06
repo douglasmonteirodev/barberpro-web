@@ -134,7 +134,12 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
             </Button>
 
             {!subscription && count >= 3 && (
-              <Flex direction="row" justifyContent="center" alignItems="center">
+              <Flex
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                mt={4}
+              >
                 <Text>Você atingiu seu limite de cortes.</Text>
                 <Link href="/planos">
                   <Text
