@@ -7,12 +7,14 @@ import {
   Text,
   Link as ChakraLink,
   useMediaQuery,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Sidebar } from "../../components/sidebar";
 import Link from "next/link";
 import { IoMdPerson } from "react-icons/io";
 import { setupAPIClient } from "../../services/api";
+import ModalInfo from "../../components/modal";
 
 export interface ScheduleItem {
   id: string;
@@ -30,8 +32,15 @@ interface DashboardProps {
 
 export default function Dashboard({ schedule }: DashboardProps) {
   const [list, setList] = useState(schedule);
+  const { onClose, onOpen, isOpen } = useDisclosure();
+  const [service, setService] = useState<ScheduleItem>();
 
   const [isMobile] = useMediaQuery("(max-width:500px)");
+
+  function handleOpenModal(item: ScheduleItem) {
+    setService(item);
+    onOpen();
+  }
 
   return (
     <>
@@ -52,6 +61,7 @@ export default function Dashboard({ schedule }: DashboardProps) {
           </Flex>
           {list.map((item) => (
             <ChakraLink
+              onClick={() => handleOpenModal(item)}
               w="100%"
               m={0}
               p={0}
@@ -103,6 +113,14 @@ export default function Dashboard({ schedule }: DashboardProps) {
           ))}
         </Flex>
       </Sidebar>
+
+      <ModalInfo
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        data={service}
+        finishService={async () => {}}
+      />
     </>
   );
 }
@@ -111,8 +129,6 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
   try {
     const apiClient = setupAPIClient(ctx);
     const response = await apiClient.get("/schedule");
-
-    console.log(response.data);
 
     return {
       props: {
