@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Sidebar } from "../../components/sidebar";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { setupAPIClient } from "../../services/api";
-import { IoMdPricetag } from "react-icons/io";
+import { RxScissors } from "react-icons/rx";
 
 interface HaircutsItem {
   id: string;
@@ -132,7 +132,7 @@ export default function Haircuts({ haircuts }: HaircutsProps) {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  <IoMdPricetag size={28} color="#fba931" />
+                  <RxScissors size={28} color="#fba931" />
                   <Text fontWeight="bold" ml={4} noOfLines={2}>
                     {haircut.name}
                   </Text>

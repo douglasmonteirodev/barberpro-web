@@ -150,7 +150,7 @@ export default function EditHaircut({
                 onChange={(e) => setPrice(e.target.value)}
               />
 
-              <Stack alignItems="center" direction="row" mb={4} mt={1}>
+              <Stack alignItems="center" direction="row" mb={6} mt={3}>
                 <Switch
                   colorScheme="red"
                   size="lg"
