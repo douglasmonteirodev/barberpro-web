@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import {
   Button,
@@ -11,9 +12,27 @@ import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Sidebar } from "../../components/sidebar";
 import Link from "next/link";
 import { IoMdPerson } from "react-icons/io";
+import { setupAPIClient } from "../../services/api";
 
-export default function Dashboard() {
+export interface ScheduleItem {
+  id: string;
+  customer: string;
+  haircut: {
+    id: string;
+    name: string | number;
+    price: string | number;
+    user_id: string;
+  };
+}
+interface DashboardProps {
+  schedule: ScheduleItem[];
+}
+
+export default function Dashboard({ schedule }: DashboardProps) {
+  const [list, setList] = useState(schedule);
+
   const [isMobile] = useMediaQuery("(max-width:500px)");
+
   return (
     <>
       <Head>
@@ -31,44 +50,57 @@ export default function Dashboard() {
               <Button bg="gray.700">Registrar</Button>
             </Link>
           </Flex>
-
-          <ChakraLink
-            w="100%"
-            m={0}
-            p={0}
-            mt={1}
-            bg="transparent"
-            style={{ textDecoration: "none" }}
-          >
-            <Flex
+          {list.map((item) => (
+            <ChakraLink
               w="100%"
-              direction={isMobile ? "column" : "row"}
-              p={4}
-              rounded={8}
-              bg="barber.400"
-              justify="space-between"
-              align={isMobile ? "flex-start" : "center"}
+              m={0}
+              p={0}
+              mt={2}
+              bg="transparent"
+              style={{ textDecoration: "none" }}
+              key={item?.id}
             >
               <Flex
-                direction="row"
-                mb={isMobile ? 2 : 0}
-                align="center"
-                justify="center"
+                w="100%"
+                direction={isMobile ? "column" : "row"}
+                p={4}
+                rounded={8}
+                bg="barber.400"
+                justify="space-between"
+                align={isMobile ? "flex-start" : "center"}
               >
-                <IoMdPerson size={28} color="#fba931" />
-                <Text fontWeight="bold" ml={4} noOfLines={2}>
-                  Douglas Monteiro
-                </Text>
-              </Flex>
+                <Flex
+                  direction="row"
+                  mb={isMobile ? 2 : 0}
+                  align="center"
+                  justify="flex-start"
+                  minW="33%"
+                >
+                  <IoMdPerson size={28} color="#fba931" />
+                  <Text fontWeight="bold" ml={4} noOfLines={2}>
+                    {item?.customer}
+                  </Text>
+                </Flex>
 
-              <Text fontWeight="bold" mb={isMobile ? 2 : 0}>
-                Corte completo
-              </Text>
-              <Text fontWeight="bold" mb={isMobile ? 2 : 0}>
-                R$ 55.44
-              </Text>
-            </Flex>
-          </ChakraLink>
+                <Flex minW="33%" align="center" justify="center">
+                  <Text fontWeight="bold" mb={isMobile ? 2 : 0}>
+                    {item?.haircut?.name}
+                  </Text>
+                </Flex>
+
+                <Flex
+                  minW="33%"
+                  align="center"
+                  alignItems="flex-end"
+                  justify="flex-end"
+                >
+                  <Text fontWeight="bold" mb={isMobile ? 2 : 0}>
+                    R${item?.haircut?.price}
+                  </Text>
+                </Flex>
+              </Flex>
+            </ChakraLink>
+          ))}
         </Flex>
       </Sidebar>
     </>
@@ -76,7 +108,23 @@ export default function Dashboard() {
 }
 
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-  return {
-    props: {},
-  };
+  try {
+    const apiClient = setupAPIClient(ctx);
+    const response = await apiClient.get("/schedule");
+
+    console.log(response.data);
+
+    return {
+      props: {
+        schedule: response.data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        schedule: [],
+      },
+    };
+  }
 });
