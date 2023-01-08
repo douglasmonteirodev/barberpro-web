@@ -105,13 +105,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push("/dashboard");
     } catch (err) {
+      alert("Ops Algo deu errado");
       console.log("ERRO AO ENTRAR", err);
     }
   }
 
   async function signUp({ name, email, password }: SignUpProps) {
     try {
-      const response = await api.post("/users", {
+      await api.post("/users", {
         name,
         email,
         password,

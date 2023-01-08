@@ -42,6 +42,25 @@ export default function Dashboard({ schedule }: DashboardProps) {
     onOpen();
   }
 
+  async function handleFinish(id: string) {
+    try {
+      const apiClient = setupAPIClient();
+      await apiClient.delete("/schedule", {
+        params: {
+          schedule_id: id,
+        },
+      });
+      const filterItem = list.filter((item) => item?.id !== id);
+
+      setList(filterItem);
+      onClose();
+    } catch (error) {
+      console.log(error);
+      onClose();
+      alert("Erro ao finalizar");
+    }
+  }
+
   return (
     <>
       <Head>
@@ -119,7 +138,7 @@ export default function Dashboard({ schedule }: DashboardProps) {
         onOpen={onOpen}
         onClose={onClose}
         data={service}
-        finishService={async () => {}}
+        finishService={() => handleFinish(service?.id)}
       />
     </>
   );

@@ -66,7 +66,7 @@ export default function ModalInfo({
                 bg: "#ffb13e",
               }}
               mr={3}
-              onClick={() => finishService}
+              onClick={finishService}
               fontWeight="bold"
               color="gray.700"
             >
