@@ -102,6 +102,7 @@ export default function EditHaircut({
                 alignItems="center"
                 justifyContent="center"
                 mr={4}
+                _hover={{ bg: "gray.700", color: "gray.200" }}
               >
                 <FiChevronLeft size={24} />
                 Voltar
@@ -169,7 +170,8 @@ export default function EditHaircut({
               <Button
                 bg="button.cta"
                 w="100%"
-                color="gray.900"
+                color="gray.800"
+                fontWeight="bold"
                 mb={4}
                 _hover={{ bg: "#ffb13e" }}
                 disabled={subscription?.status !== "active"}

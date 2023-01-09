@@ -67,6 +67,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
                 justifyContent="center"
                 alignItems="center"
                 mr={4}
+                _hover={{ bg: "gray.700", color: "gray.200" }}
               >
                 <FiChevronLeft size={24} />
                 Voltar
@@ -124,7 +125,8 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
             <Button
               size="lg"
               w="85%"
-              color="gray.900"
+              color="gray.800"
+              fontWeight="bold"
               bg="button.cta"
               _hover={{ bg: "#ffb13e" }}
               disabled={!subscription && count >= 3}

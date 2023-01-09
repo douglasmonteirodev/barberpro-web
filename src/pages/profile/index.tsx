@@ -148,6 +148,8 @@ export default function Profile({ user, premium }: ProfileProps) {
                 mb={4}
                 bg="button.cta"
                 size="lg"
+                color="gray.800"
+                fontWeight="bold"
                 _hover={{ bg: "#ffb13e" }}
                 onClick={handleUpdateUser}
               >

@@ -108,7 +108,8 @@ export default function New({ haircuts }: NewProps) {
               size="lg"
               w="85%"
               bg="button.cta"
-              color="gray.900"
+              color="gray.800"
+              fontWeight="bold"
               _hover={{
                 bg: "#ffb13e",
               }}

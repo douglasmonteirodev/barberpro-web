@@ -110,7 +110,7 @@ export default function Planos({ premium }: PlanosProps) {
               <Button
                 bg={premium ? "gray.700" : "button.cta"}
                 m={2}
-                color={premium ? "#fff" : "button.cta"}
+                color={premium ? "#fff" : "gray.800"}
                 fontWeight="bold"
                 onClick={() => {}}
                 disabled={premium}

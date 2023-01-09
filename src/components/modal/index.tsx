@@ -67,8 +67,8 @@ export default function ModalInfo({
               }}
               mr={3}
               onClick={finishService}
+              color="gray.800"
               fontWeight="bold"
-              color="gray.700"
             >
               Finalizar serviço
             </Button>

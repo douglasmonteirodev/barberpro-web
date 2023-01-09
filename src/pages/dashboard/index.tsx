@@ -70,12 +70,17 @@ export default function Dashboard({ schedule }: DashboardProps) {
       <Sidebar>
         <Flex direction="column" align="flex-start" justify="flex-start">
           <Flex w="100%" direction="row" align="center" justify="flex-start">
-            <Heading fontSize="3xl" mt={4} mb={4} mr={4}>
+            <Heading fontSize="3xl" mt={4} mb={4} mr={4} color="orange.900">
               Agenda
             </Heading>
 
             <Link href="/new" legacyBehavior>
-              <Button bg="gray.700">Registrar</Button>
+              <Button
+                bg="gray.700"
+                _hover={{ bg: "gray.700", color: "gray.100" }}
+              >
+                Registrar
+              </Button>
             </Link>
           </Flex>
           {list.map((item) => (
