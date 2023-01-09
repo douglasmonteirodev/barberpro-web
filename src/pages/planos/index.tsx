@@ -1,9 +1,16 @@
 import Head from "next/head";
 import { Button, Flex, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import { Sidebar } from "../../components/sidebar";
+import { canSSRAuth } from "../../utils/canSSRAuth";
+import { setupAPIClient } from "./../../services/api";
 
-export default function Planos() {
+interface PlanosProps {
+  premium: boolean;
+}
+
+export default function Planos({ premium }: PlanosProps) {
   const [isMobile] = useMediaQuery("(max-widht:500px)");
+
   return (
     <>
       <Head>
@@ -97,12 +104,31 @@ export default function Planos() {
                 ml={4}
                 mb={2}
               >
-                R$ 9.99
+                R$ 19.99
               </Text>
 
-              <Button bg="button.cta" m={2} color="white" onClick={() => {}}>
-                VIRAR PREMIUM
+              <Button
+                bg={premium ? "gray.700" : "button.cta"}
+                m={2}
+                color={premium ? "#fff" : "button.cta"}
+                fontWeight="bold"
+                onClick={() => {}}
+                disabled={premium}
+              >
+                {premium ? "Você já é premium" : "Virar Premium"}
               </Button>
+
+              {premium && (
+                <Button
+                  m={2}
+                  bg="white"
+                  color="gray.900"
+                  fontWeight="bold"
+                  onClick={() => {}}
+                >
+                  Alterar assinatura
+                </Button>
+              )}
             </Flex>
           </Flex>
         </Flex>
@@ -110,3 +136,30 @@ export default function Planos() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  try {
+    const apiClient = setupAPIClient(ctx);
+    const response = await apiClient.get("/me");
+
+    console.log(response.data);
+
+    return {
+      props: {
+        premium:
+          response.data?.user?.subscriptions?.status === "active"
+            ? true
+            : false,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+});
