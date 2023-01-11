@@ -3,6 +3,7 @@ import { Button, Flex, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import { Sidebar } from "../../components/sidebar";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { setupAPIClient } from "./../../services/api";
+import { getStripeJs } from "../../services/stripe-js";
 
 interface PlanosProps {
   premium: boolean;
@@ -10,6 +11,26 @@ interface PlanosProps {
 
 export default function Planos({ premium }: PlanosProps) {
   const [isMobile] = useMediaQuery("(max-widht:500px)");
+
+  async function handleSubscribe() {
+    if (premium) {
+      return;
+    }
+
+    try {
+      const apiClient = setupAPIClient();
+      const response = await apiClient.post("/subscribe");
+
+      const { sessionId } = response.data;
+
+      const stripe = await getStripeJs();
+      await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -104,7 +125,7 @@ export default function Planos({ premium }: PlanosProps) {
                 ml={4}
                 mb={2}
               >
-                R$ 19.99
+                R$ 12.90
               </Text>
 
               <Button
@@ -112,7 +133,7 @@ export default function Planos({ premium }: PlanosProps) {
                 m={2}
                 color={premium ? "#fff" : "gray.800"}
                 fontWeight="bold"
-                onClick={() => {}}
+                onClick={handleSubscribe}
                 disabled={premium}
               >
                 {premium ? "Você já é premium" : "Virar Premium"}
