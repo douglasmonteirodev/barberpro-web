@@ -32,6 +32,21 @@ export default function Planos({ premium }: PlanosProps) {
     }
   }
 
+  async function handleCreatePortal() {
+    try {
+      if (!premium) {
+        return;
+      }
+
+      const apiClient = setupAPIClient();
+      const reponse = await apiClient.post("/create-portal");
+      const { sessionId } = reponse.data;
+      window.location.href = sessionId;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -145,7 +160,7 @@ export default function Planos({ premium }: PlanosProps) {
                   bg="white"
                   color="gray.900"
                   fontWeight="bold"
-                  onClick={() => {}}
+                  onClick={handleCreatePortal}
                 >
                   Alterar assinatura
                 </Button>
