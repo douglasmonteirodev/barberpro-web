@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "../../context/AuthContext";
 import { canSSRGuest } from "../../utils/canSSRGuest";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const { signIn } = useContext(AuthContext);
@@ -15,7 +16,7 @@ export default function Login() {
 
   async function handleLogin() {
     if (email === "" || password === "") {
-      alert("Preencha todos os campos");
+      toast.warning("Preencha todos os campos!");
       return;
     }
 
@@ -55,7 +56,7 @@ export default function Login() {
             variant="filled"
             size="lg"
             placeholder="************"
-            type="text"
+            type="password"
             mb={3}
             value={password}
             onChange={(e) => setPassword(e.target.value)}

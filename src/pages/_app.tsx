@@ -2,6 +2,8 @@ import type { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 import { AuthProvider } from "../context/AuthContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const styles = {
   global: {
@@ -38,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <Component {...pageProps} />
+        <ToastContainer autoClose={2000} />
       </AuthProvider>
     </ChakraProvider>
   );

@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { setupAPIClient } from "../../services/api";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 interface HaircutsProps {
   id: string;
@@ -29,8 +30,8 @@ export default function New({ haircuts }: NewProps) {
   }
 
   async function handleRegister() {
-    if (customer === "") {
-      alert("Preencha o nome do cliente");
+    if (customer === "" || !haircutSelected) {
+      toast.warning("Preencha o nome do cliente");
       return;
     }
 
@@ -43,7 +44,9 @@ export default function New({ haircuts }: NewProps) {
       });
 
       router.push("/dashboard");
+      setTimeout(() => toast.success("Cliente adicionado com sucesso!"), 1);
     } catch (error) {
+      toast.error("Ops! Algo deu errado.");
       console.log(error);
     }
   }
@@ -56,9 +59,16 @@ export default function New({ haircuts }: NewProps) {
 
       <Sidebar>
         <Flex direction="column" align="flex-start" justify="flex-start">
-          <Flex direction="row" w="100%" align="center" justify="flex-start">
+          <Flex
+            direction="row"
+            w="100%"
+            align="center"
+            justify="flex-start"
+            mb={5}
+            color="orange.900"
+          >
             <Heading fontSize="3xl" mt={4}>
-              Novo corte
+              Novo cliente
             </Heading>
           </Flex>
 
@@ -84,26 +94,28 @@ export default function New({ haircuts }: NewProps) {
                 setCustomer(e.target.value)
               }
             />
+            {haircutSelected && (
+              <Select
+                mb={5}
+                size="lg"
+                w="85%"
+                bg="barber.900"
+                onChange={(e) => handleChangeSelect(e.target.value)}
+              >
+                {haircuts.map((item) => (
+                  <option
+                    value={item?.id}
+                    key={item?.id}
+                    style={{
+                      background: "#242222",
+                    }}
+                  >
+                    {item?.name}
+                  </option>
+                ))}
+              </Select>
+            )}
 
-            <Select
-              mb={5}
-              size="lg"
-              w="85%"
-              bg="barber.900"
-              onChange={(e) => handleChangeSelect(e.target.value)}
-            >
-              {haircuts.map((item) => (
-                <option
-                  value={item?.id}
-                  key={item?.id}
-                  style={{
-                    background: "#242222",
-                  }}
-                >
-                  {item?.name}
-                </option>
-              ))}
-            </Select>
             <Button
               size="lg"
               w="85%"

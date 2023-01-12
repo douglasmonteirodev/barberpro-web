@@ -3,6 +3,7 @@ import { destroyCookie, setCookie, parseCookies } from "nookies";
 import Router from "next/router";
 
 import { api } from "../services/apiClient";
+import { toast } from "react-toastify";
 
 interface AuthContextData {
   user: UserProps;
@@ -43,12 +44,13 @@ interface SignUpProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function signOut() {
-  console.log("ERORR LOGOUT");
   try {
     destroyCookie(null, "@barber.token", { path: "/" });
     Router.push("/login");
+    toast.success("Usuário deslogado com sucesso!");
   } catch (err) {
-    console.log("Error ao sair");
+    console.log(err);
+    toast.error("Ops! Algo deu errado");
   }
 }
 
@@ -104,9 +106,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
       Router.push("/dashboard");
+      setTimeout(() => toast.success("Login realizado com sucesso!"), 1);
     } catch (err) {
-      alert("Ops Algo deu errado");
-      console.log("ERRO AO ENTRAR", err);
+      toast.error("Ops! Senha/Email inválidos");
+      console.log(err);
     }
   }
 
@@ -119,7 +122,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       Router.push("/login");
+      toast.success("Usuário criado com sucesso!");
     } catch (err) {
+      toast.error("Ops! Algo deu errado");
       console.log(err);
     }
   }
@@ -128,9 +133,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       destroyCookie(null, "@barber.token", { path: "/" });
       Router.push("/login");
+      setTimeout(() => toast.success("Usuário deslogado com sucesso!"), 1);
       setUser(null);
     } catch (err) {
-      console.log("ERRO AO SAIR", err);
+      toast.error("Ops! Algo deu errado");
+      console.log(err);
     }
   }
 

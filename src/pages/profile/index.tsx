@@ -6,6 +6,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
 import { setupAPIClient } from "../../services/api";
+import { toast } from "react-toastify";
 
 interface UserProps {
   id: string;
@@ -29,17 +30,18 @@ export default function Profile({ user, premium }: ProfileProps) {
     await logoutUser();
   }
   async function handleUpdateUser() {
-    if (name === "" || endereco === "") {
+    if (name === "") {
+      toast.warning("O nome da barbearia não pode ficar vazio.");
       return;
     }
 
     try {
       const apiClient = setupAPIClient();
-
       await apiClient.put("/users", {
         name,
         endereco,
       });
+      toast.success("Dados atualizados com sucesso!");
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +99,7 @@ export default function Profile({ user, premium }: ProfileProps) {
               <Input
                 w="100%"
                 bg="gray.900"
-                placeholder="Nome da sua barbearia"
+                placeholder="Endereço da sua barbearia"
                 size="lg"
                 type="text"
                 mb={3}

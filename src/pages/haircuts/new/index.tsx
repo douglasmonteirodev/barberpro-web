@@ -14,6 +14,7 @@ import { canSSRAuth } from "../../../utils/canSSRAuth";
 import { setupAPIClient } from "../../../services/api";
 import { useState } from "react";
 import Router from "next/router";
+import { toast } from "react-toastify";
 
 interface NewHaircutProps {
   subscription: boolean;
@@ -27,6 +28,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
 
   async function handleRegister() {
     if (name === "" || price === "") {
+      toast.warning("Por favor, preencha todos os campos!");
       return;
     }
     try {
@@ -38,6 +40,7 @@ export default function NewHaircut({ subscription, count }: NewHaircutProps) {
       });
 
       Router.push("/haircuts");
+      setTimeout(() => toast.success("Corte criado com sucesso!"), 1);
     } catch (error) {
       console.log(error);
     }

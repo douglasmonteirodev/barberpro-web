@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "../../context/AuthContext";
 import { canSSRGuest } from "../../utils/canSSRGuest";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const { signUp } = useContext(AuthContext);
@@ -16,7 +17,7 @@ export default function Register() {
 
   async function handleRegister() {
     if (name === "" || email === "" || password === "") {
-      alert("Complete todos os dados");
+      toast.warning("Preencha todos os campos!");
       return;
     }
 
@@ -71,7 +72,7 @@ export default function Register() {
             variant="filled"
             size="lg"
             placeholder="************"
-            type="text"
+            type="password"
             mb={3}
             value={password}
             onChange={(e) => setPassword(e.target.value)}

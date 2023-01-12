@@ -16,6 +16,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth";
 import { setupAPIClient } from "./../../services/api";
 import { useState, ChangeEvent } from "react";
 import Router from "next/router";
+import { toast } from "react-toastify";
 
 interface HaircutProps {
   id: string;
@@ -61,6 +62,7 @@ export default function EditHaircut({
 
   async function handleUptade() {
     if (name === "" || price === "") {
+      toast.warning("Os campos não pode ficar vazios.");
       return;
     }
     try {
@@ -72,6 +74,7 @@ export default function EditHaircut({
         haircut_id: haircut?.id,
       });
       Router.push("/haircuts");
+      setTimeout(() => toast.success("Corte atualizado com sucesso!"), 1);
     } catch (error) {
       console.log(error);
     }

@@ -15,6 +15,7 @@ import Link from "next/link";
 import { IoMdPerson } from "react-icons/io";
 import { setupAPIClient } from "../../services/api";
 import ModalInfo from "../../components/modal";
+import { toast } from "react-toastify";
 
 export interface ScheduleItem {
   id: string;
@@ -54,6 +55,7 @@ export default function Dashboard({ schedule }: DashboardProps) {
 
       setList(filterItem);
       onClose();
+      setTimeout(() => toast.success("Serviço com sucesso!"), 1);
     } catch (error) {
       console.log(error);
       onClose();
