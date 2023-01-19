@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BARBER PRO WEB
 
-## Getting Started
+<p align="center">
+  <img src="src/assets/preview/home.png">
+</p>
 
-First, run the development server:
+[![GitHub](https://img.shields.io/badge/api-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasmonteirodev/barberpro-api)
+[![Figma](https://img.shields.io/badge/figma-ir-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/tevkFhTTdShQdKUeaouoDB/Barber-PRO?node-id=0%3A1&t=EWRMsr17yEQbtmPu-0) [![Blog](https://img.shields.io/website?label=review-linkedin&style=for-the-badge&url=https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)](https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Objetivo:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Foi criar um sistema completo fullstack para barbearias do zero, com a possibilidade de assinatura mensal via pagamento recorrente com cartão de crédito, usando as tecnologias modernas presente no mercado.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Descrição:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Sobre as tecnologias utilizadas.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `Foi criado com Next JS + Typescript.`
+- `Utilizado chakra ui para estilização.`
+- `E o Stripe como gateway de pagamentos.`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### <i> No modelo Free.</i>
 
-## Learn More
+- `O usuário vai precisar fazer seu cadastro para ter acesso.`
+- `Com o login feito, o usuário poderá fazer o cadastro de até 3 cortes.`
+- `Também não terá a opção de editar os cortes.`
+- `Isso permitirá ele ter uma noção geral do sistema, se ele gostar tem a opção de virar premium.`
 
-To learn more about Next.js, take a look at the following resources:
+### <i> No modelo Premium.</i>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `Para virar premium foi feita toda uma integração com um gateway de pagamento, isso possibilitará a cobrança recorrente por um cartão de crédito.`
+- `O cliente poderá criar cortes ilimitados sem limitação.`
+- `Editar modelos de cortes.`
+- `Editar perfil.`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Sobre o funcionamento do sistema.
 
-## Deploy on Vercel
+- `Fazendo o seu cadastro e também criando os modelos de cortes, o usuário que controla terá acesso ao dashboard, onde possibilitará ele agendar ordens de serviços para os clientes de acordo com a chegada, e ir finalizando com o decorrer do funcionamento da barbearia.`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## <i>Douglas Monteiro</i> 😁🔥🚀
