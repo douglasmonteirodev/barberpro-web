@@ -1,11 +1,11 @@
 # BARBER PRO WEB
 
+[![GitHub](https://img.shields.io/badge/api-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasmonteirodev/barberpro-api)
+[![Figma](https://img.shields.io/badge/figma-ir-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/tevkFhTTdShQdKUeaouoDB/Barber-PRO?node-id=0%3A1&t=EWRMsr17yEQbtmPu-0) [![Blog](https://img.shields.io/website?label=review-linkedin&style=for-the-badge&url=https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)](https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)
+
 <p align="center">
   <img src="src/assets/preview/home.png">
 </p>
-
-[![GitHub](https://img.shields.io/badge/api-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/douglasmonteirodev/barberpro-api)
-[![Figma](https://img.shields.io/badge/figma-ir-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/file/tevkFhTTdShQdKUeaouoDB/Barber-PRO?node-id=0%3A1&t=EWRMsr17yEQbtmPu-0) [![Blog](https://img.shields.io/website?label=review-linkedin&style=for-the-badge&url=https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)](https://www.linkedin.com/posts/douglasmonteiro1_nodejs-react-reactjs-activity-7019118237296517120-nLWB?utm_source=share&utm_medium=member_desktop)
 
 ## Objetivo:
 
